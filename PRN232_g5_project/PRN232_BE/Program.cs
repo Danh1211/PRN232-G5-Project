@@ -1,6 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using PRN232_BE;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<CloneEbayDb1Context>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
