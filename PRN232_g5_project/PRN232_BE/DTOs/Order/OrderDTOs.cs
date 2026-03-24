@@ -13,9 +13,9 @@ public class OrderResponse
     // Thêm cho detail
     public string? SellerUsername { get; set; }
     public string? BuyerUsername { get; set; }
-    public Address? Address { get; set; }
+    public AddressDto? Address { get; set; }
     public PaymentDto? Payment { get; set; }
-    public ShippingInfo? Shipping { get; set; }
+    public ShippingDto? Shipping { get; set; }
 }
 
 public class PaymentDto
@@ -57,6 +57,14 @@ public class ReturnRequestDto
     public string Reason { get; set; } = string.Empty;
 }
 
+public class PagedOrderResponse
+{
+    public int Total { get; set; }
+    public int Page { get; set; }
+    public int PageSize { get; set; }
+    public List<OrderResponse> Data { get; set; } = new List<OrderResponse>();
+}
+
 public class OrderFilterRequest
 {
     public string? Status { get; set; }
@@ -64,4 +72,21 @@ public class OrderFilterRequest
     public DateTime? ToDate { get; set; }
     public int Page { get; set; } = 1;
     public int PageSize { get; set; } = 20;
+}
+
+public class AddressDto
+{
+    public int Id { get; set; }
+    public string Street { get; set; }
+    public string City { get; set; }
+    public string Country { get; set; }
+}
+
+public class ShippingDto
+{
+    public int Id { get; set; }
+    public string? Carrier { get; set; }
+    public string? TrackingNumber { get; set; }
+    public string? Status { get; set; }
+    public DateTime? EstimatedArrival { get; set; }
 }

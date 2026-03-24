@@ -21,7 +21,7 @@ public class ReviewController : ControllerBase
         _env = env;
     }
 
-    private int GetCurrentUserId() => int.Parse(User.FindFirst("id")?.Value ?? "0");
+    private int GetCurrentUserId() => int.Parse(User.FindFirst("UserId")?.Value ?? "0");
 
     // ===============================
     // CREATE REVIEW + IMAGES (mới & cải tiến)
@@ -40,6 +40,13 @@ public class ReviewController : ControllerBase
 
         var order = await _context.OrderTables
             .FirstOrDefaultAsync(o => o.Id == request.OrderId && o.BuyerId == userId);
+
+        // Load luôn User để lấy Username
+        var currentUser = await _context.Users
+            .FirstOrDefaultAsync(u => u.Id == userId);
+
+        if (currentUser == null)
+            return Unauthorized("User không tồn tại");
 
         if (order == null)
             return BadRequest("Order không hợp lệ hoặc không phải của bạn");
@@ -74,7 +81,7 @@ public class ReviewController : ControllerBase
             Id = review.Id,
             Rating = review.Rating,
             Comment = review.Comment,
-            ReviewerName = User.Identity?.Name ?? "User",
+            ReviewerName = currentUser.Username,
             CreatedAt = review.CreatedAt,
             ImageUrls = imageUrls
         });

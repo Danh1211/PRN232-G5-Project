@@ -19,34 +19,43 @@ public class OrderController : ControllerBase
         _context = context;
     }
 
-    private int GetCurrentUserId() => int.Parse(User.FindFirst("id")?.Value ?? "0");
+    private int GetCurrentUserId() => int.Parse(User.FindFirst("UserId")?.Value ?? "0");
 
-    // ===============================
-    // 1. CREATE ORDER (đã cải thiện)
-    // ===============================
     [HttpPost]
     public async Task<ActionResult<OrderResponse>> CreateOrder([FromBody] CreateOrderRequest request)
     {
         var userId = GetCurrentUserId();
-        if (request.Quantity <= 0) return BadRequest("Quantity phải > 0");
+
+        if (request.Quantity <= 0)
+            return BadRequest("Quantity phải > 0");
 
         var address = await _context.Addresses
             .FirstOrDefaultAsync(a => a.Id == request.AddressId && a.UserId == userId);
-        if (address == null) return BadRequest("Địa chỉ không hợp lệ");
+
+        if (address == null)
+            return BadRequest("Địa chỉ không hợp lệ");
 
         var product = await _context.Products.FindAsync(request.ProductId);
-        if (product == null) return BadRequest("Sản phẩm không tồn tại");
+        if (product == null)
+            return BadRequest("Sản phẩm không tồn tại");
 
         var buyer = await _context.Users.FindAsync(userId);
+        if (buyer == null)
+            return Unauthorized("Không tìm thấy người dùng");
+
         var totalPrice = product.Price * request.Quantity;
 
-        if (buyer.Balance < totalPrice) return BadRequest("Không đủ tiền trong tài khoản");
+        if (buyer.Balance < totalPrice)
+            return BadRequest("Không đủ tiền trong tài khoản");
 
         var validMethods = new[] { "credit_card", "paypal", "bank_transfer" };
-        var paymentMethod = request.PaymentMethod?.ToLower() ?? "credit_card";
-        if (!validMethods.Contains(paymentMethod)) return BadRequest("Payment method không hợp lệ");
+        var paymentMethod = (request.PaymentMethod?.ToLower() ?? "credit_card").Trim();
+
+        if (!validMethods.Contains(paymentMethod))
+            return BadRequest("Payment method không hợp lệ");
 
         using var transaction = await _context.Database.BeginTransactionAsync();
+
         try
         {
             var order = new OrderTable
@@ -61,7 +70,7 @@ public class OrderController : ControllerBase
             };
 
             _context.OrderTables.Add(order);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();        // Lưu để có Order Id
 
             var payment = new Payment
             {
@@ -84,12 +93,13 @@ public class OrderController : ControllerBase
             };
             _context.ShippingInfos.Add(shipping);
 
-            // Escrow: trừ tiền buyer ngay (sẽ hoàn nếu cancel/return)
+            // Escrow: trừ tiền buyer
             buyer.Balance -= totalPrice;
 
             await _context.SaveChangesAsync();
             await transaction.CommitAsync();
 
+            // ==================== FIX RESPONSE Ở ĐÂY ====================
             return Ok(new OrderResponse
             {
                 Id = order.Id,
@@ -97,13 +107,46 @@ public class OrderController : ControllerBase
                 Quantity = request.Quantity,
                 TotalPrice = totalPrice,
                 Status = order.Status,
-                OrderDate = order.OrderDate
+                OrderDate = order.OrderDate,
+
+                // Tránh null propagating error + trả về thông tin hữu ích hơn
+                SellerUsername = product.SellerId > 0 ?
+                    (await _context.Users.FindAsync(product.SellerId))?.Username : null,
+
+                BuyerUsername = buyer.Username,
+
+                Address = new AddressDto
+                {
+                    Id = address.Id,
+                    Street = address.Street,
+                    City = address.City,
+                    Country = address.Country
+                },
+
+                Payment = new PaymentDto
+                {
+                    Id = payment.Id,
+                    Amount = payment.Amount,
+                    Method = payment.Method,
+                    Status = payment.Status,
+                    PaidAt = payment.PaidAt
+                },
+
+                Shipping = new ShippingDto
+                {
+                    Id = shipping.Id,
+                    Carrier = shipping.Carrier,
+                    TrackingNumber = shipping.TrackingNumber,
+                    Status = shipping.Status,
+                    EstimatedArrival = shipping.EstimatedArrival
+                }
             });
         }
-        catch
+        catch (Exception ex)
         {
             await transaction.RollbackAsync();
-            return StatusCode(500, "Lỗi hệ thống khi tạo order");
+            // Nên log lỗi ở production
+            return StatusCode(500, $"Lỗi hệ thống khi tạo order: {ex.Message}");
         }
     }
 
@@ -141,7 +184,13 @@ public class OrderController : ControllerBase
             OrderDate = order.OrderDate,
             SellerUsername = order.Seller?.Username,
             BuyerUsername = order.Buyer?.Username,
-            Address = order.Address,
+            Address = new AddressDto
+            {
+                Id = order.Address.Id,
+                Street = order.Address.Street,
+                City = order.Address.City,
+                Country = order.Address.Country
+            },
             Payment = order.Payments.Select(p => new PaymentDto
             {
                 Id = p.Id,
@@ -150,31 +199,45 @@ public class OrderController : ControllerBase
                 Status = p.Status,
                 PaidAt = p.PaidAt
             }).FirstOrDefault(),
-            Shipping = order.ShippingInfos.FirstOrDefault()
-        };
+            Shipping = order.ShippingInfos
+                .Select(s => new ShippingDto
+                {
+                    Id = s.Id,
+                    Carrier = s.Carrier,
+                    TrackingNumber = s.TrackingNumber,
+                    Status = s.Status,
+                    EstimatedArrival = s.EstimatedArrival
+                })
+                .FirstOrDefault()
+            };
 
         return Ok(response);
     }
 
-    // ===============================
-    // 3 & 4. GET ORDERS BY BUYER / SELLER (có filter + pagination)
-    // ===============================
+    // ================================
+    // GET ORDERS BY BUYER & SELLER (TỐI ƯU + ĐẦY ĐỦ DTO)
+    // ================================
     [HttpGet("buyer")]
     [HttpGet("seller")]
-    public async Task<ActionResult<IEnumerable<OrderResponse>>> GetOrders(
-        [FromQuery] OrderFilterRequest filter)
+    public async Task<ActionResult<PagedOrderResponse>> GetOrders([FromQuery] OrderFilterRequest filter)
     {
         var userId = GetCurrentUserId();
         var isBuyer = Request.Path.Value?.Contains("buyer", StringComparison.OrdinalIgnoreCase) == true;
 
         var query = _context.OrderTables
             .AsNoTracking()
+            .AsSplitQuery()                    // Quan trọng: tránh Cartesian explosion
             .Include(o => o.Product)
+            .Include(o => o.Seller)
+            .Include(o => o.Buyer)
+            .Include(o => o.Address)
             .Include(o => o.Payments)
+            .Include(o => o.ShippingInfos)
             .Where(o => isBuyer ? o.BuyerId == userId : o.SellerId == userId);
 
+        // === Filters ===
         if (!string.IsNullOrEmpty(filter.Status))
-            query = query.Where(o => o.Status == filter.Status);
+            query = query.Where(o => o.Status.ToLower() == filter.Status.ToLower());
 
         if (filter.FromDate.HasValue)
             query = query.Where(o => o.OrderDate >= filter.FromDate.Value);
@@ -183,6 +246,7 @@ public class OrderController : ControllerBase
             query = query.Where(o => o.OrderDate <= filter.ToDate.Value);
 
         var total = await query.CountAsync();
+
         var orders = await query
             .OrderByDescending(o => o.OrderDate)
             .Skip((filter.Page - 1) * filter.PageSize)
@@ -190,19 +254,60 @@ public class OrderController : ControllerBase
             .Select(o => new OrderResponse
             {
                 Id = o.Id,
-                ProductTitle = o.Product.Title,
+                ProductTitle = o.Product != null ? o.Product.Title : string.Empty,
                 Quantity = o.Amount,
-                TotalPrice = o.Payments.First().Amount,
-                Status = o.Status,
-                OrderDate = o.OrderDate
+                TotalPrice = o.Payments.FirstOrDefault() != null ? o.Payments.First().Amount : 0,
+                Status = o.Status ?? string.Empty,
+                OrderDate = o.OrderDate,
+
+                // Sửa lỗi null propagating ở đây
+                SellerUsername = o.Seller != null ? o.Seller.Username : null,
+                BuyerUsername = o.Buyer != null ? o.Buyer.Username : null,
+
+                // Address
+                Address = o.Address != null ? new AddressDto
+                {
+                    Id = o.Address.Id,
+                    Street = o.Address.Street,
+                    City = o.Address.City,
+                    Country = o.Address.Country
+                } : null,
+
+                // Payment
+                Payment = o.Payments.FirstOrDefault() != null ? new PaymentDto
+                {
+                    Id = o.Payments.First().Id,
+                    Amount = o.Payments.First().Amount,
+                    Method = o.Payments.First().Method,
+                    Status = o.Payments.First().Status,
+                    PaidAt = o.Payments.First().PaidAt
+                } : null,
+
+                // Shipping
+                Shipping = o.ShippingInfos.FirstOrDefault() != null ? new ShippingDto
+                {
+                    Id = o.ShippingInfos.First().Id,
+                    Carrier = o.ShippingInfos.First().Carrier,
+                    TrackingNumber = o.ShippingInfos.First().TrackingNumber,
+                    Status = o.ShippingInfos.First().Status,
+                    EstimatedArrival = o.ShippingInfos.First().EstimatedArrival
+                } : null
             })
             .ToListAsync();
 
-        return Ok(new { Total = total, Page = filter.Page, PageSize = filter.PageSize, Data = orders });
+        var response = new PagedOrderResponse
+        {
+            Total = total,
+            Page = filter.Page,
+            PageSize = filter.PageSize,
+            Data = orders
+        };
+
+        return Ok(response);
     }
 
     // ===============================
-    // 5. UPDATE ORDER STATUS (chủ yếu seller)
+    // 5. UPDATE ORDER STATUS (chủ yếu seller- update Sang processing)
     // ===============================
     [HttpPut("{id}/status")]
     public async Task<IActionResult> UpdateOrderStatus(int id, [FromBody] UpdateOrderStatusRequest request)
@@ -236,7 +341,7 @@ public class OrderController : ControllerBase
     }
 
     // ===============================
-    // 6. MARK AS SHIPPED + Tracking (seller)
+    // 6. MARK AS SHIPPED + Tracking (seller) -update orderstatus sang shipped
     // ===============================
     [HttpPost("{id}/ship")]
     public async Task<IActionResult> ShipOrder(int id, [FromBody] ShipOrderRequest request)
@@ -247,7 +352,7 @@ public class OrderController : ControllerBase
             .FirstOrDefaultAsync(o => o.Id == id);
 
         if (order == null) return NotFound();
-        if (order.SellerId != userId) return Forbid();
+        if (order.SellerId != userId) return Forbid("Chỉ seller mới được cập nhật status");
 
         if (order.Status != "processing")
             return BadRequest("Order phải ở trạng thái processing mới được ship");
@@ -386,8 +491,12 @@ public class OrderController : ControllerBase
     public async Task<IActionResult> RejectReturn(int returnId)
     {
         var userId = GetCurrentUserId();
-        var req = await _context.ReturnRequests.FindAsync(returnId);
-        if (req == null || req.Order.SellerId != userId) return Forbid();
+        var req = await _context.ReturnRequests
+            .Include(r => r.Order)
+            .ThenInclude(o => o.Payments)
+            .FirstOrDefaultAsync(r => r.Id == returnId);
+        if (req == null) return NotFound();
+        if (req.Order.SellerId != userId) return Forbid();
 
         req.Status = "rejected";
         await _context.SaveChangesAsync();
@@ -415,11 +524,11 @@ public class OrderController : ControllerBase
     // ===============================
     [Authorize(Roles = "admin")] // hoặc kiểm tra thêm
     [HttpPost("{id}/refund")]
-    public async Task<IActionResult> ManualRefund(int id)
+    public async Task<IActionResult> ManualRefund(int orderid)
     {
         var order = await _context.OrderTables
             .Include(o => o.Payments)
-            .FirstOrDefaultAsync(o => o.Id == id);
+            .FirstOrDefaultAsync(o => o.Id == orderid);
 
         if (order == null) return NotFound();
 
