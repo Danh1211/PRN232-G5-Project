@@ -7,6 +7,8 @@ using Microsoft.OpenApi.Models;
 using PRN232_BE.BackgroundJobs;
 
 var builder = WebApplication.CreateBuilder(args);
+Encoder.Equals(Encoding.UTF8, Encoding.UTF8);
+Decoder.Equals(Encoding.UTF8, Encoding.UTF8);
 
 builder.Services.AddDbContext<CloneEbayDb1Context>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
@@ -14,7 +16,7 @@ builder.Services.AddDbContext<CloneEbayDb1Context>(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHostedService<AutoReleaseOrdersService>();
-// 2. C?u h�nh JWT Authentication
+// 2. Cấu hình JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 	.AddJwtBearer(options =>
 	{
@@ -24,20 +26,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 			ValidateAudience = true,
 			ValidateLifetime = true,
 			ValidateIssuerSigningKey = true,
-			ValidIssuer = builder.Configuration["Jwt:Issuer"], // L?y t? appsettings.json
-			ValidAudience = builder.Configuration["Jwt:Audience"], // L?y t? appsettings.json
-			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])) // L?y t? appsettings.json
+			ValidIssuer = builder.Configuration["Jwt:Issuer"], // Lấy từ appsettings.json
+			ValidAudience = builder.Configuration["Jwt:Audience"], // Lấy từ appsettings.json
+			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])) // Lấy từ appsettings.json
 		};
 	});
 
-// 3. C?u h�nh Swagger ?? h? tr? nh?p JWT Token
+// 3. Cấu hình Swagger ?? hỗ trợ nhập JWT Token
 builder.Services.AddSwaggerGen(c =>
 {
 	c.SwaggerDoc("v1", new OpenApiInfo { Title = "Ebay Clone API", Version = "v1" });
 
 	c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
 	{
-		Description = "JWT Authorization header using the Bearer scheme. H�y nh?p Token c?a b?n v�o � b�n d??i.\r\n\r\nV� d?: 'eyJhbGciOiJIUzI1NiIs...'",
+		Description = "JWT Authorization header using the Bearer scheme. Hãy nhập Token của bạn vào bên dưới.\r\n\r\nVí dụ: 'eyJhbGciOiJIUzI1NiIs...'",
 		Name = "Authorization",
 		In = ParameterLocation.Header,
 		Type = SecuritySchemeType.Http,
@@ -71,7 +73,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// 4. K�CH HO?T AUTHENTICATION (B?t bu?c ph?i n?m TR??C UseAuthorization)
+// 4. KÍCH HOẠT AUTHENTICATION (Bắt buộc phải nằm TRƯỚC UseAuthorization)
 app.UseAuthentication();
 app.UseAuthorization();
 
