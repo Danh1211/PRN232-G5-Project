@@ -7,9 +7,6 @@ using Microsoft.OpenApi.Models;
 using PRN232_BE.BackgroundJobs;
 
 var builder = WebApplication.CreateBuilder(args);
-Encoder.Equals(Encoding.UTF8, Encoding.UTF8);
-Decoder.Equals(Encoding.UTF8, Encoding.UTF8);
-
 builder.Services.AddDbContext<CloneEbayDb1Context>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
 
