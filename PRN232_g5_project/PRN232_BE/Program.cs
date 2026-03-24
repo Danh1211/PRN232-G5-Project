@@ -3,7 +3,8 @@ using PRN232_BE;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.OpenApi.Models; 
+using Microsoft.OpenApi.Models;
+using PRN232_BE.BackgroundJobs;
 
 var builder = WebApplication.CreateBuilder(args);
 Encoder.Equals(Encoding.UTF8, Encoding.UTF8);
@@ -14,7 +15,7 @@ builder.Services.AddDbContext<CloneEbayDb1Context>(options =>
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-
+builder.Services.AddHostedService<AutoReleaseOrdersService>();
 // 2. Cấu hình JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 	.AddJwtBearer(options =>
