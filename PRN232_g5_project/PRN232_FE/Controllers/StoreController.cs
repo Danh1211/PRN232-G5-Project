@@ -102,6 +102,14 @@ namespace PRN232_FE.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProduct(ProductCreateRequest request)
         {
+            if (!string.IsNullOrEmpty(request.PriceString))
+            {
+                if (decimal.TryParse(request.PriceString.Replace(",", "."), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out var p))
+                {
+                    request.Price = p;
+                }
+            }
+
             var userId = HttpContext.Session.GetInt32("UserId");
             var token = HttpContext.Session.GetString("JwtToken");
 
