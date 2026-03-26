@@ -39,7 +39,14 @@ namespace PRN232_FE.Controllers
                     viewModel.Categories = JsonSerializer.Deserialize<List<CategoryViewModel>>(catString, options) ?? new List<CategoryViewModel>();
                 }
 
-                var prodResponse = await client.GetAsync($"{baseUrl}/api/Product/GetAll");
+                var userId = HttpContext.Session.GetInt32("UserId");
+                string productUrl = $"{baseUrl}/api/Product/GetAll";
+                if (userId != null && userId > 0)
+                {
+                    productUrl = $"{baseUrl}/api/Product/GetByOther/{userId}";
+                }
+
+                var prodResponse = await client.GetAsync(productUrl);
                 if (prodResponse.IsSuccessStatusCode)
                 {
                     var prodString = await prodResponse.Content.ReadAsStringAsync();
