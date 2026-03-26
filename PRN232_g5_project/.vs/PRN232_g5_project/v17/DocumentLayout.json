@@ -3,8 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\laptop368\\Desktop\\project_thientd\\PRN232-G5-Project\\PRN232_g5_project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E7D0D7E4-C96D-4B85-1F3F-905C36EFD04F}|PRN232_BE\\PRN232_BE.csproj|c:\\users\\laptop368\\desktop\\project_thientd\\prn232-g5-project\\prn232_g5_project\\prn232_be\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E7D0D7E4-C96D-4B85-1F3F-905C36EFD04F}|PRN232_BE\\PRN232_BE.csproj|solutionrelative:prn232_be\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E8E54496-25D0-4B33-BFD1-6B43C9416F0B}|PRN232_BE\\PRN232_BE.csproj|c:\\users\\laptop368\\desktop\\project_thientd\\prn232-g5-project\\prn232_g5_project\\prn232_be\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E8E54496-25D0-4B33-BFD1-6B43C9416F0B}|PRN232_BE\\PRN232_BE.csproj|solutionrelative:prn232_be\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC61E842-E646-44DA-8532-24EC91CD02EB}|PRN232_FE\\PRN232_FE.csproj|c:\\users\\laptop368\\desktop\\project_thientd\\prn232-g5-project\\prn232_g5_project\\prn232_fe\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC61E842-E646-44DA-8532-24EC91CD02EB}|PRN232_FE\\PRN232_FE.csproj|solutionrelative:prn232_fe\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8E54496-25D0-4B33-BFD1-6B43C9416F0B}|PRN232_BE\\PRN232_BE.csproj|c:\\users\\laptop368\\desktop\\project_thientd\\prn232-g5-project\\prn232_g5_project\\prn232_be\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8E54496-25D0-4B33-BFD1-6B43C9416F0B}|PRN232_BE\\PRN232_BE.csproj|solutionrelative:prn232_be\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E8E54496-25D0-4B33-BFD1-6B43C9416F0B}|PRN232_BE\\PRN232_BE.csproj|c:\\users\\laptop368\\desktop\\project_thientd\\prn232-g5-project\\prn232_g5_project\\prn232_be\\models\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E8E54496-25D0-4B33-BFD1-6B43C9416F0B}|PRN232_BE\\PRN232_BE.csproj|solutionrelative:prn232_be\\models\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC61E842-E646-44DA-8532-24EC91CD02EB}|PRN232_FE\\PRN232_FE.csproj|c:\\users\\laptop368\\desktop\\project_thientd\\prn232-g5-project\\prn232_g5_project\\prn232_fe\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BC61E842-E646-44DA-8532-24EC91CD02EB}|PRN232_FE\\PRN232_FE.csproj|solutionrelative:prn232_fe\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 62,
+          "SelectedChildIndex": 64,
           "Children": [
             {
               "$type": "Bookmark",
@@ -266,15 +282,67 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\project_thientd\\PRN232-G5-Project\\PRN232_g5_project\\PRN232_FE\\Program.cs",
+              "RelativeDocumentMoniker": "PRN232_FE\\Program.cs",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\project_thientd\\PRN232-G5-Project\\PRN232_g5_project\\PRN232_FE\\Program.cs",
+              "RelativeToolTip": "PRN232_FE\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T09:20:15.625Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\project_thientd\\PRN232-G5-Project\\PRN232_g5_project\\PRN232_FE\\appsettings.json",
+              "RelativeDocumentMoniker": "PRN232_FE\\appsettings.json",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\project_thientd\\PRN232-G5-Project\\PRN232_g5_project\\PRN232_FE\\appsettings.json",
+              "RelativeToolTip": "PRN232_FE\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-26T08:55:50.797Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\project_thientd\\PRN232-G5-Project\\PRN232_g5_project\\PRN232_BE\\appsettings.json",
+              "RelativeDocumentMoniker": "PRN232_BE\\appsettings.json",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\project_thientd\\PRN232-G5-Project\\PRN232_g5_project\\PRN232_BE\\appsettings.json",
+              "RelativeToolTip": "PRN232_BE\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-26T07:51:07.749Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\project_thientd\\PRN232-G5-Project\\PRN232_g5_project\\PRN232_BE\\Program.cs",
               "RelativeDocumentMoniker": "PRN232_BE\\Program.cs",
               "ToolTip": "C:\\Users\\laptop368\\Desktop\\project_thientd\\PRN232-G5-Project\\PRN232_g5_project\\PRN232_BE\\Program.cs",
               "RelativeToolTip": "PRN232_BE\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-26T07:16:30.459Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ChatHub.cs",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\project_thientd\\PRN232-G5-Project\\PRN232_g5_project\\PRN232_BE\\Models\\ChatHub.cs",
+              "RelativeDocumentMoniker": "PRN232_BE\\Models\\ChatHub.cs",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\project_thientd\\PRN232-G5-Project\\PRN232_g5_project\\PRN232_BE\\Models\\ChatHub.cs",
+              "RelativeToolTip": "PRN232_BE\\Models\\ChatHub.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAwDIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-26T09:13:01.461Z",
               "EditorCaption": ""
             }
           ]
