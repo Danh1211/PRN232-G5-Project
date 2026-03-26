@@ -107,7 +107,8 @@ namespace PRN232_BE.Controllers
                 CategoryId = request.CategoryId,
                 IsAuction = false,
                 AuctionEndTime = null,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                ThumbnailUrl = request.ThumbnailUrl
             };
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
@@ -116,11 +117,12 @@ namespace PRN232_BE.Controllers
             {
                 SellerId = sellerId,
                 StoreId = store.Id,
-                Title = request.Title,
-                Description = request.Description,
-                Price = request.Price,
-                CategoryId = request.CategoryId,
-                CreatedAt = product.CreatedAt
+                Title = product.Title,
+                Description = product.Description,
+                Price = product.Price,
+                CategoryId = product.CategoryId,
+                CreatedAt = product.CreatedAt,
+                ThumbnailUrl = product.ThumbnailUrl
             });
         }
     }

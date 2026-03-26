@@ -15,5 +15,6 @@ namespace PRN232_BE.DTOs.Product
 
         [Required(ErrorMessage = "CategoryId is required.")]
         public int CategoryId { get; set; }
+        public string? ThumbnailUrl { get; set; }
     }
 }
