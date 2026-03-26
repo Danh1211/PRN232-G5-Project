@@ -66,7 +66,7 @@ public class OrderController : ControllerBase
                 ProductId = request.ProductId,
                 OrderDate = DateTime.UtcNow,
                 Amount = request.Quantity,
-                Status = "pending"
+                Status = "shipped"   //->changes sang shipped
             };
 
             _context.OrderTables.Add(order);
@@ -87,7 +87,7 @@ public class OrderController : ControllerBase
             {
                 OrderId = order.Id,
                 Carrier = "GHN",
-                Status = "pending",
+                Status = "shipped",  //->changes sang shipped
                 HasSignature = false,
                 EstimatedArrival = DateTime.UtcNow.AddDays(7)
             };
@@ -307,7 +307,7 @@ public class OrderController : ControllerBase
     }
 
     // ===============================
-    // 5. UPDATE ORDER STATUS (chủ yếu seller- update Sang processing)
+    // 5. UPDATE ORDER STATUS (chủ yếu seller)
     // ===============================
     [HttpPut("{id}/status")]
     public async Task<IActionResult> UpdateOrderStatus(int id, [FromBody] UpdateOrderStatusRequest request)
@@ -343,33 +343,33 @@ public class OrderController : ControllerBase
     // ===============================
     // 6. MARK AS SHIPPED + Tracking (seller) -update orderstatus sang shipped
     // ===============================
-    [HttpPost("{id}/ship")]
-    public async Task<IActionResult> ShipOrder(int id, [FromBody] ShipOrderRequest request)
-    {
-        var userId = GetCurrentUserId();
-        var order = await _context.OrderTables
-            .Include(o => o.ShippingInfos)
-            .FirstOrDefaultAsync(o => o.Id == id);
+    //[HttpPost("{id}/ship")]
+    //public async Task<IActionResult> ShipOrder(int id, [FromBody] ShipOrderRequest request)
+    //{
+    //    var userId = GetCurrentUserId();
+    //    var order = await _context.OrderTables
+    //        .Include(o => o.ShippingInfos)
+    //        .FirstOrDefaultAsync(o => o.Id == id);
 
-        if (order == null) return NotFound();
-        if (order.SellerId != userId) return Forbid("Chỉ seller mới được cập nhật status");
+    //    if (order == null) return NotFound();
+    //    if (order.SellerId != userId) return Forbid("Chỉ seller mới được cập nhật status");
 
-        if (order.Status != "processing")
-            return BadRequest("Order phải ở trạng thái processing mới được ship");
+    //    if (order.Status != "processing")
+    //        return BadRequest("Order phải ở trạng thái processing mới được ship");
 
-        var shipping = order.ShippingInfos.FirstOrDefault();
-        if (shipping == null) return NotFound("Không tìm thấy shipping info");
+    //    var shipping = order.ShippingInfos.FirstOrDefault();
+    //    if (shipping == null) return NotFound("Không tìm thấy shipping info");
 
-        shipping.Carrier = request.Carrier;
-        shipping.TrackingNumber = request.TrackingNumber;
-        shipping.Status = "shipped";
-        shipping.EstimatedArrival = request.EstimatedArrival ?? DateTime.UtcNow.AddDays(5);
+    //    shipping.Carrier = request.Carrier;
+    //    shipping.TrackingNumber = request.TrackingNumber;
+    //    shipping.Status = "shipped";
+    //    shipping.EstimatedArrival = request.EstimatedArrival ?? DateTime.UtcNow.AddDays(5);
 
-        order.Status = "shipped";
+    //    order.Status = "shipped";
 
-        await _context.SaveChangesAsync();
-        return Ok(new { Message = "Đã đánh dấu shipped và cập nhật tracking" });
-    }
+    //    await _context.SaveChangesAsync();
+    //    return Ok(new { Message = "Đã đánh dấu shipped và cập nhật tracking" });
+    //}
 
     // ===============================
     // 7. BUYER CONFIRM RECEIVED (release tiền cho seller)

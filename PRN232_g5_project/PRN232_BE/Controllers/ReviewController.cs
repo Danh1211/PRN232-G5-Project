@@ -54,9 +54,13 @@ public class ReviewController : ControllerBase
         if (order.Status != "delivered" && order.Status != "completed")   // tôi sửa thành delivered cho thực tế
             return BadRequest("Chỉ được review khi order đã delivered");
 
-        var exists = await _context.Reviews.AnyAsync(r => r.OrderId == request.OrderId);
+        var exists = await _context.Reviews.AnyAsync(r =>
+            r.ProductId == order.ProductId
+            && r.ReviewerId == userId
+        );
+
         if (exists)
-            return BadRequest("Bạn đã review order này rồi");
+            return BadRequest("Bạn đã review sản phẩm này rồi");
 
         var review = new Review
         {
