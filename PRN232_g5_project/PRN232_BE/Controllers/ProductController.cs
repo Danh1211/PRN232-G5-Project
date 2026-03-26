@@ -69,7 +69,8 @@ namespace PRN232_BE.Controllers
                     Description = p.Description,
                     Price = p.Price,
                     CategoryId = p.CategoryId,
-                    CreatedAt = p.CreatedAt
+                    CreatedAt = p.CreatedAt,
+                    ThumbnailUrl = p.ThumbnailUrl
                 })
                 .ToListAsync();
             return Ok(products);
@@ -89,7 +90,8 @@ namespace PRN232_BE.Controllers
                     Description = p.Description,
                     Price = p.Price,
                     CategoryId = p.CategoryId,
-                    CreatedAt = p.CreatedAt
+                    CreatedAt = p.CreatedAt,
+                    ThumbnailUrl = p.ThumbnailUrl
                 })
                 .ToListAsync();
             return Ok(products);
