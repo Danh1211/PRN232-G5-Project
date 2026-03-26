@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PRN232_BE.Models;
 using PRN232_BE.DTOs;
@@ -7,6 +7,7 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using PRN232_BE.DTOs.Auth;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PRN232_BE.Controllers
 {
@@ -54,7 +55,7 @@ namespace PRN232_BE.Controllers
 				Password = hashedPassword,
 				Role = "User", // Mặc định là User
 				AvatarUrl = "https://th.bing.com/th/id/OIP.yZvMziAUA939DB0zWaZcjwHaLH?w=186&h=279&c=7&r=0&o=7&dpr=1.4&pid=1.7&rm=3",
-				Balance = 0,
+				Balance = 10000,
 				CreatedAt = DateTime.Now
 			};
 
@@ -118,6 +119,25 @@ namespace PRN232_BE.Controllers
 				signingCredentials: credentials);
 
 			return new JwtSecurityTokenHandler().WriteToken(token);
+		}
+
+		[Authorize]
+		[HttpGet("profile")]
+		public async Task<IActionResult> GetProfile()
+		{
+			var userIdString = User.FindFirst("UserId")?.Value;
+			if (string.IsNullOrEmpty(userIdString) || !int.TryParse(userIdString, out var userId))
+				return Unauthorized();
+
+			var user = await _context.Users.FindAsync(userId);
+			if (user == null) return NotFound();
+
+			return Ok(new {
+				Id = user.Id,
+				Username = user.Username,
+				Email = user.Email,
+				Balance = user.Balance
+			});
 		}
 	}
 }

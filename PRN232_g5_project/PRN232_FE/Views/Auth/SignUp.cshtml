@@ -42,6 +42,27 @@
         </div>
 
         <div class="ebay-form-group">
+            <input type="text" id="phone" name="Phone" class="ebay-input" placeholder=" " value="@Model?.Phone" required />
+            <label for="phone" class="ebay-floating-label">Phone</label>
+        </div>
+
+        <div class="ebay-form-group">
+            <input type="text" id="street" name="Street" class="ebay-input" placeholder=" " value="@Model?.Street" required />
+            <label for="street" class="ebay-floating-label">Street Address</label>
+        </div>
+
+        <div class="row-inputs">
+            <div class="ebay-form-group">
+                <input type="text" id="city" name="City" class="ebay-input" placeholder=" " value="@Model?.City" required />
+                <label for="city" class="ebay-floating-label">City</label>
+            </div>
+            <div class="ebay-form-group">
+                <input type="text" id="country" name="Country" class="ebay-input" placeholder=" " value="@Model?.Country" required />
+                <label for="country" class="ebay-floating-label">Country</label>
+            </div>
+        </div>
+
+        <div class="ebay-form-group">
             <input type="password" id="password" name="Password" class="ebay-input" placeholder=" " required />
             <label for="password" class="ebay-floating-label">Password</label>
         </div>

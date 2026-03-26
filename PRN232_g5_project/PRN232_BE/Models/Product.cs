@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace PRN232_BE.Models;
@@ -24,6 +24,8 @@ public partial class Product
     public DateTime? AuctionEndTime { get; set; }
 
     public DateTime CreatedAt { get; set; }
+
+    public string? ThumbnailUrl { get; set; }
 
     public virtual Category Category { get; set; } = null!;
 
