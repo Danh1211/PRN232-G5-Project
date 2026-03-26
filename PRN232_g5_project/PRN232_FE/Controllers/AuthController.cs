@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using PRN232_FE.Models;
 using System.Text.Json;
 using System.Text;
+using System.Net.Http.Headers;
 
 namespace PRN232_FE.Controllers
 {
@@ -53,9 +54,22 @@ namespace PRN232_FE.Controllers
 
                     if (result != null && result.TryGetValue("token", out var tokenElement))
                     {
-                        var token = tokenElement.ToString();
-                        HttpContext.Session.SetString("JwtToken", token!);
-                        // Also store user info if needed
+                        var token = tokenElement.ToString()!.Trim('"');
+                        HttpContext.Session.SetString("JwtToken", token);
+                        
+                        if (result.TryGetValue("userId", out var userIdElement))
+                        {
+                            if (int.TryParse(userIdElement.ToString(), out var userId))
+                            {
+                                HttpContext.Session.SetInt32("UserId", userId);
+                            }
+                        }
+
+                        if (result.TryGetValue("username", out var usernameElement))
+                        {
+                            HttpContext.Session.SetString("Username", usernameElement.ToString()!);
+                        }
+                        
                         return RedirectToAction("Index", "Home");
                     }
                 }
@@ -118,7 +132,58 @@ namespace PRN232_FE.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
-                    // Success, redirect to login
+                    // Auto-login to get the Token and UserId
+                    var loginContent = new StringContent(JsonSerializer.Serialize(new { UsernameOrEmail = username, Password = model.Password }), Encoding.UTF8, "application/json");
+                    var loginResponse = await client.PostAsync($"{baseUrl}/api/Auth/login", loginContent);
+                    if (loginResponse.IsSuccessStatusCode)
+                    {
+                        var loginResponseStr = await loginResponse.Content.ReadAsStringAsync();
+                        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                        var loginResult = JsonSerializer.Deserialize<Dictionary<string, object>>(loginResponseStr, options);
+
+                        string token = string.Empty;
+                        int userId = 0;
+
+                        if (loginResult != null && loginResult.TryGetValue("token", out var tokenElement))
+                        {
+                            token = tokenElement.ToString()!.Trim('"');
+                            HttpContext.Session.SetString("JwtToken", token);
+                        }
+
+                        if (loginResult != null && loginResult.TryGetValue("userId", out var userIdElement))
+                        {
+                            if (int.TryParse(userIdElement.ToString(), out var parsedId))
+                            {
+                                userId = parsedId;
+                                HttpContext.Session.SetInt32("UserId", userId);
+                            }
+                        }
+
+                        if (loginResult != null && loginResult.TryGetValue("username", out var usernameElement))
+                        {
+                            HttpContext.Session.SetString("Username", usernameElement.ToString()!);
+                        }
+
+                        // Create Address using the token and userId
+                        if (!string.IsNullOrEmpty(token) && userId > 0)
+                        {
+                            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                            var addressBody = new
+                            {
+                                Phone = model.Phone,
+                                Street = model.Street,
+                                City = model.City,
+                                Country = model.Country,
+                                IsDefault = true
+                            };
+                            var addrContent = new StringContent(JsonSerializer.Serialize(addressBody), Encoding.UTF8, "application/json");
+                            await client.PostAsync($"{baseUrl}/api/Address/AddAddress/{userId}", addrContent);
+                        }
+
+                        // Redirect to Home now that they are logged in and have an address
+                        return RedirectToAction("Index", "Home");
+                    }
+
                     TempData["SuccessMessage"] = "Registration successful! Please sign in.";
                     return RedirectToAction("SignIn");
                 }
@@ -143,6 +208,103 @@ namespace PRN232_FE.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Profile()
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            var token = HttpContext.Session.GetString("JwtToken");
+
+            if (userId == null || string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("SignIn");
+            }
+
+            var client = _httpClientFactory.CreateClient();
+            var baseUrl = _configuration["ApiSettings:BaseUrl"] ?? "http://localhost:5003";
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var addressResponse = await client.GetAsync($"{baseUrl}/api/Address/GetAddressByUserId/{userId}");
+            var addresses = new List<AddressViewModel>();
+            if (addressResponse.IsSuccessStatusCode)
+            {
+                var addressString = await addressResponse.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                addresses = JsonSerializer.Deserialize<List<AddressViewModel>>(addressString, options) ?? new List<AddressViewModel>();
+            }
+
+            return View(addresses);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddAddress(AddressViewModel model)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            var token = HttpContext.Session.GetString("JwtToken");
+
+            if (userId == null || string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("SignIn");
+            }
+
+            var client = _httpClientFactory.CreateClient();
+            var baseUrl = _configuration["ApiSettings:BaseUrl"] ?? "http://localhost:5003";
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var addressBody = new
+            {
+                Phone = model.Phone,
+                Street = model.Street,
+                City = model.City,
+                Country = model.Country,
+                IsDefault = true // Newly added address from profile gets marked as default
+            };
+            var content = new StringContent(JsonSerializer.Serialize(addressBody), Encoding.UTF8, "application/json");
+            
+            var response = await client.PostAsync($"{baseUrl}/api/Address/AddAddress/{userId}", content);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["SuccessMessage"] = "Successfully added new address!";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Failed to add address.";
+            }
+
+            return RedirectToAction("Profile");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> TopUp()
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null) return RedirectToAction("SignIn");
+            
+            var client = _httpClientFactory.CreateClient();
+            var baseUrl = _configuration["ApiSettings:BaseUrl"] ?? "http://localhost:5003";
+            var token = HttpContext.Session.GetString("JwtToken");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            
+            var response = await client.PostAsync($"{baseUrl}/api/Balance/add-funds/{userId}", null);
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["SuccessMessage"] = "Successfully added $1000 to your wallet! Try placing your order again.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Failed to top up balance.";
+            }
+            
+            return RedirectToAction("Profile");
+        }
+
+        [HttpGet]
+        public IActionResult SignOut()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

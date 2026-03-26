@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PRN232_BE.DTOs.Product;
@@ -22,16 +22,37 @@ namespace PRN232_BE.Controllers
             var products = await _context.Products.
                 Select(p => new ProductResponse
                 {
+                    Id = p.Id,
                     SellerId = p.SellerId,
                     StoreId = p.StoreId,
                     Title = p.Title,
                     Description = p.Description,
                     Price = p.Price,
                     CategoryId = p.CategoryId,
-                    CreatedAt = p.CreatedAt
+                    CreatedAt = p.CreatedAt,
+                    ThumbnailUrl = p.ThumbnailUrl
                 })
                 .ToListAsync();
             return Ok(products);
+        }
+
+        [HttpGet("GetById/{id}")]
+        public async Task<IActionResult> GetProductById(int id)
+        {
+            var p = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
+            if (p == null) return NotFound();
+            return Ok(new ProductResponse
+            {
+                Id = p.Id,
+                SellerId = p.SellerId,
+                StoreId = p.StoreId,
+                Title = p.Title,
+                Description = p.Description,
+                Price = p.Price,
+                CategoryId = p.CategoryId,
+                CreatedAt = p.CreatedAt,
+                ThumbnailUrl = p.ThumbnailUrl
+            });
         }
 
         [HttpGet("GetBySellerId/{sellerId}")]
@@ -41,6 +62,7 @@ namespace PRN232_BE.Controllers
                 .Where(p => p.SellerId == sellerId)
                 .Select(p => new ProductResponse
                 {
+                    Id = p.Id,
                     SellerId = p.SellerId,
                     StoreId = p.StoreId,
                     Title = p.Title,
@@ -60,6 +82,7 @@ namespace PRN232_BE.Controllers
                 .Where(p => p.SellerId != sellerId)
                 .Select(p => new ProductResponse
                 {
+                    Id = p.Id,
                     SellerId = p.SellerId,
                     StoreId = p.StoreId,
                     Title = p.Title,
@@ -107,20 +130,23 @@ namespace PRN232_BE.Controllers
                 CategoryId = request.CategoryId,
                 IsAuction = false,
                 AuctionEndTime = null,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                ThumbnailUrl = request.ThumbnailUrl
             };
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
             return Ok(new ProductResponse
             {
+                Id = product.Id,
                 SellerId = sellerId,
                 StoreId = store.Id,
                 Title = request.Title,
                 Description = request.Description,
                 Price = request.Price,
                 CategoryId = request.CategoryId,
-                CreatedAt = product.CreatedAt
+                CreatedAt = product.CreatedAt,
+                ThumbnailUrl = product.ThumbnailUrl
             });
         }
     }

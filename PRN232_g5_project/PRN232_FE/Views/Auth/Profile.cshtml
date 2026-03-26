@@ -1,0 +1,99 @@
+@model List<PRN232_FE.Models.AddressViewModel>
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<div class="container" style="max-width: 800px; margin: 40px auto; padding: 0 16px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+        <h1 style="font-size: 28px; font-weight: bold; color: #333; margin: 0;">My Profile</h1>
+        <a href="/" style="color: #3665f3; text-decoration: none; font-size: 14px;">Back to Home</a>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success" style="font-size: 14px; margin-bottom: 24px;">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" style="font-size: 14px; margin-bottom: 24px;">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+        
+        <!-- Left: Addresses List & Wallet -->
+        <div style="flex: 1; min-width: 300px;">
+            <div style="border: 1px solid #e5e5e5; padding: 24px; border-radius: 8px; margin-bottom: 24px; background-color: #f7f7f7;">
+                <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 16px;">My Wallet</h3>
+                <p style="font-size: 14px; margin-bottom: 16px; color: #707070;">You need sufficient balance to place orders. Add funds here:</p>
+                <form action="/Auth/TopUp" method="post">
+                    <button type="submit" style="padding: 10px 20px; background-color: #008a00; color: white; border: none; border-radius: 20px; font-weight: bold; cursor: pointer;">+ Add $1000 to Wallet</button>
+                </form>
+            </div>
+
+            <div style="border: 1px solid #e5e5e5; padding: 24px; border-radius: 8px;">
+                <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 16px;">My Shipping Addresses</h3>
+                
+                @if (Model != null && Model.Any())
+                {
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        @foreach (var addr in Model)
+                        {
+                            <div style="padding: 16px; border: 1px solid @(addr.IsDefault ? "#3665f3" : "#e5e5e5"); border-radius: 8px;">
+                                @if (addr.IsDefault)
+                                {
+                                    <span style="background-color: #3665f3; color: white; padding: 2px 8px; border-radius: 12px; font-size: 12px; font-weight: bold; display: inline-block; margin-bottom: 8px;">Default</span>
+                                }
+                                <div style="font-size: 14px; color: #333; line-height: 1.5;">
+                                    <div style="font-weight: bold;">@addr.Street</div>
+                                    <div>@addr.City, @addr.Country</div>
+                                    <div style="color: #707070;">@addr.Phone</div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-warning" style="font-size: 14px; margin: 0;">
+                        You don't have any shipping addresses yet.
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Right: Add New Address Form -->
+        <div style="flex: 1; min-width: 300px;">
+            <div style="border: 1px solid #e5e5e5; padding: 24px; border-radius: 8px; background-color: #f7f7f7;">
+                <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 16px;">Add New Address</h3>
+                
+                <form action="/Auth/AddAddress" method="post">
+                    <div class="ebay-form-group" style="margin-bottom: 16px;">
+                        <label for="Street" style="font-size: 14px; font-weight: bold; margin-bottom: 8px; display: block;">Street Address</label>
+                        <input type="text" id="Street" name="Street" class="form-control" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+                    </div>
+                    
+                    <div class="ebay-form-group" style="margin-bottom: 16px;">
+                        <label for="City" style="font-size: 14px; font-weight: bold; margin-bottom: 8px; display: block;">City</label>
+                        <input type="text" id="City" name="City" class="form-control" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+                    </div>
+                    
+                    <div class="ebay-form-group" style="margin-bottom: 16px;">
+                        <label for="Country" style="font-size: 14px; font-weight: bold; margin-bottom: 8px; display: block;">Country</label>
+                        <input type="text" id="Country" name="Country" class="form-control" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+                    </div>
+                    
+                    <div class="ebay-form-group" style="margin-bottom: 24px;">
+                        <label for="Phone" style="font-size: 14px; font-weight: bold; margin-bottom: 8px; display: block;">Phone Number</label>
+                        <input type="text" id="Phone" name="Phone" class="form-control" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+                    </div>
+
+                    <button type="submit" style="width: 100%; font-size: 16px; padding: 12px; background-color: #3665f3; color: white; border: none; border-radius: 24px; font-weight: bold; cursor: pointer;">Save Address</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
