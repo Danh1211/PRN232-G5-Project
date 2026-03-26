@@ -15,6 +15,9 @@ namespace PRN232_FE.Controllers
 
         public IActionResult Index()
         {
+            var token = HttpContext.Session.GetString("JwtToken");
+            ViewBag.IsLoggedIn = !string.IsNullOrEmpty(token);
+            
             return View();
         }
 

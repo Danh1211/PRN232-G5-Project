@@ -1,0 +1,72 @@
+@model PRN232_FE.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Create an Account";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+    ViewData["ShowTellUs"] = true; // eBay shows "Already have an account? Sign in" in header
+}
+
+<div class="auth-card" style="max-width: 480px;">
+    <h1 class="auth-title">Create an account</h1>
+    
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger" style="font-size: 14px; margin-top: 16px;">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+    
+    <div class="ebay-radio-group" style="justify-content: center; margin-top: 24px;">
+        <label class="ebay-radio-item">
+            <input type="radio" name="accountType" value="personal" checked> Personal
+        </label>
+        <label class="ebay-radio-item">
+            <input type="radio" name="accountType" value="business"> Business
+        </label>
+    </div>
+
+    <form action="/Auth/SignUp" method="post">
+        <div class="row-inputs">
+            <div class="ebay-form-group">
+                <input type="text" id="firstname" name="Firstname" class="ebay-input" placeholder=" " value="@Model?.Firstname" required />
+                <label for="firstname" class="ebay-floating-label">First name</label>
+            </div>
+            <div class="ebay-form-group">
+                <input type="text" id="lastname" name="Lastname" class="ebay-input" placeholder=" " value="@Model?.Lastname" required />
+                <label for="lastname" class="ebay-floating-label">Last name</label>
+            </div>
+        </div>
+
+        <div class="ebay-form-group">
+            <input type="email" id="email" name="Email" class="ebay-input" placeholder=" " value="@Model?.Email" required />
+            <label for="email" class="ebay-floating-label">Email</label>
+        </div>
+
+        <div class="ebay-form-group">
+            <input type="password" id="password" name="Password" class="ebay-input" placeholder=" " required />
+            <label for="password" class="ebay-floating-label">Password</label>
+        </div>
+        <span class="pwd-hint">At least 1 letter, a number or symbol, at least 8 characters.</span>
+
+        <p style="font-size: 12px; color: var(--ebay-gray); margin-bottom: 24px;">
+            By Creating an account, you agree to our <a href="#" style="color: var(--ebay-blue); text-decoration: underline;">User Agreement</a> and acknowledge reading our <a href="#" style="color: var(--ebay-blue); text-decoration: underline;">User Privacy Notice</a>.
+        </p>
+
+        <button type="submit" class="ebay-btn ebay-btn-primary">Create account</button>
+    </form>
+
+    <div class="ebay-divider">
+        <span class="ebay-divider-text">or continue with</span>
+    </div>
+
+    <div style="display: flex; gap: 16px; justify-content: center; margin-bottom: 32px;">
+        <button type="button" class="ebay-btn-social" style="width: 50px; height: 50px; border-radius: 50%; padding: 0;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" style="height: 24px;" />
+        </button>
+        <button type="button" class="ebay-btn-social" style="width: 50px; height: 50px; border-radius: 50%; padding: 0;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple" style="height: 24px;" />
+        </button>
+        <button type="button" class="ebay-btn-social" style="width: 50px; height: 50px; border-radius: 50%; padding: 0;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" alt="Facebook" style="height: 24px;" />
+        </button>
+    </div>
+</div>

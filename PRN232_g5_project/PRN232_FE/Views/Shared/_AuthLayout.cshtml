@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - eBay</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/auth.css" asp-append-version="true" />
+</head>
+<body class="auth-body">
+    <header class="auth-header">
+        <div class="auth-container">
+            <a class="auth-logo" href="/">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/EBay_logo.svg" alt="eBay Logo" height="40" />
+            </a>
+            @if (ViewData["ShowTellUs"] != null && (bool)ViewData["ShowTellUs"])
+            {
+                <span class="auth-tell-us">Tell us about you</span>
+                <span class="auth-signin-link">Already have an account? <a href="/Auth/SignIn">Sign in</a></span>
+            }
+        </div>
+    </header>
+
+    <main role="main" class="auth-main">
+        @RenderBody()
+    </main>
+
+    <footer class="auth-footer">
+        <div class="auth-footer-container">
+            <p>Copyright © 1995-@DateTime.Now.Year eBay Inc. All Rights Reserved. <a href="#">Accessibility</a>, <a href="#">User Agreement</a>, <a href="#">Privacy</a>, <a href="#">Payments Terms of Use</a>, <a href="#">Cookies</a>, <a href="#">CA Privacy Notice</a>, <a href="#">Your Privacy Choices</a> and <a href="#">AdChoice</a></p>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

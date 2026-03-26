@@ -1,8 +1,23 @@
-﻿@{
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @if (ViewBag.IsLoggedIn == true)
+    {
+        <h1 class="display-4 text-success">Welcome Back!</h1>
+        <p class="lead">You have successfully logged in.</p>
+        
+        <div class="mt-4">
+            <div class="alert alert-info d-inline-block">
+                This is a temporary home screen for authenticated users.
+            </div>
+        </div>
+    }
+    else
+    {
+        <h1 class="display-4">Welcome</h1>
+        <p>You are not logged in. <a href="/Auth/SignIn">Sign In</a> to access your account.</p>
+        <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    }
 </div>
