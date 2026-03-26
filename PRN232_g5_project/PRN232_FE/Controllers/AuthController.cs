@@ -234,6 +234,25 @@ namespace PRN232_FE.Controllers
                 addresses = JsonSerializer.Deserialize<List<AddressViewModel>>(addressString, options) ?? new List<AddressViewModel>();
             }
 
+            // Check if user has a store
+            var storeResponse = await client.GetAsync($"{baseUrl}/api/Store/check/{userId}");
+            ViewBag.HasStore = false;
+            
+            if (storeResponse.IsSuccessStatusCode)
+            {
+                var storeString = await storeResponse.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                var storeData = JsonSerializer.Deserialize<Dictionary<string, object>>(storeString, options);
+                
+                if (storeData != null && storeData.TryGetValue("hasStore", out var hasStoreElement))
+                {
+                    if(bool.TryParse(hasStoreElement.ToString(), out bool hasStore))
+                    {
+                        ViewBag.HasStore = hasStore;
+                    }
+                }
+            }
+
             return View(addresses);
         }
 
@@ -277,6 +296,43 @@ namespace PRN232_FE.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> AddStore(StoreCreateRequest request)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            var token = HttpContext.Session.GetString("JwtToken");
+
+            if (userId == null || string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("SignIn");
+            }
+
+            var client = _httpClientFactory.CreateClient();
+            var baseUrl = _configuration["ApiSettings:BaseUrl"] ?? "http://localhost:5003";
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var storeBody = new
+            {
+                StoreName = request.StoreName,
+                Description = request.Description,
+                BannerImageUrl = request.BannerImageUrl
+            };
+            var content = new StringContent(JsonSerializer.Serialize(storeBody), Encoding.UTF8, "application/json");
+            
+            var response = await client.PostAsync($"{baseUrl}/api/Store/add/{userId}", content);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["SuccessMessage"] = "Successfully created your store!";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Failed to create store. It might already exist or invalid input.";
+            }
+
+            return RedirectToAction("Profile");
+        }
+
+        [HttpPost]
         public async Task<IActionResult> TopUp()
         {
             var userId = HttpContext.Session.GetInt32("UserId");
@@ -301,7 +357,7 @@ namespace PRN232_FE.Controllers
         }
 
         [HttpGet]
-        public IActionResult SignOut()
+        public new IActionResult SignOut()
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");

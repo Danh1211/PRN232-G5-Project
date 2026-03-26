@@ -2,8 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using PRN232_FE.Models;
 using System.Diagnostics;
 using System.Text.Json;
-using System.Diagnostics;
-
 namespace PRN232_FE.Controllers
 {
     public class HomeController : Controller

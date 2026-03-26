@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PRN232_BE.DTOs.Store;
@@ -16,6 +16,13 @@ namespace PRN232_BE.Controllers
             _context = context;
         }
 
+        [HttpGet("check/{userId}")]
+        public async Task<IActionResult> HasStore(int userId)
+        {
+            var hasStore = await _context.Stores.AnyAsync(s => s.SellerId == userId);
+            return Ok(new { HasStore = hasStore });
+        }
+
         [HttpGet("{sellerId}")]
         public async Task<IActionResult> GetStoreBySellerId(int sellerId)
         {
@@ -24,12 +31,20 @@ namespace PRN232_BE.Controllers
             {
                 return NotFound();
             }
+
+            var totalReputation = await _context.FeedbackDetails
+                .Where(f => _context.Feedbacks
+                    .Where(fb => fb.Id == f.FeedbackId && fb.SellerId == sellerId)
+                    .Any())
+                .SumAsync(f => (int?)f.Type) ?? 0;
+
             return Ok(new StoreResponse
             {
                 SellerId = sellerId,
                 StoreName = store.StoreName,
                 Description = store.Description,
-                BannerImageUrl = store.BannerImageUrl
+                BannerImageUrl = store.BannerImageUrl,
+                ReputationScore = totalReputation
             });
         }
 
@@ -56,7 +71,8 @@ namespace PRN232_BE.Controllers
                 SellerId = sellerId,
                 StoreName = request.StoreName,
                 Description = request.Description,
-                BannerImageUrl = request.BannerImageUrl
+                BannerImageUrl = request.BannerImageUrl,
+                ReputationScore = 0
             });
         }
     }
