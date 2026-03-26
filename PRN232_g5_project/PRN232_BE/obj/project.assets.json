@@ -453,11 +453,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\PRN232_g5_project\\PRN232_BE\\PRN232_BE.csproj",
+      "projectUniqueName": "C:\\Users\\laptop368\\Desktop\\project_thientd\\PRN232-G5-Project\\PRN232_g5_project\\PRN232_BE\\PRN232_BE.csproj",
       "projectName": "PRN232_BE",
-      "projectPath": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\PRN232_g5_project\\PRN232_BE\\PRN232_BE.csproj",
+      "projectPath": "C:\\Users\\laptop368\\Desktop\\project_thientd\\PRN232-G5-Project\\PRN232_g5_project\\PRN232_BE\\PRN232_BE.csproj",
       "packagesPath": "C:\\Users\\laptop368\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\PRN232_g5_project\\PRN232_BE\\obj\\",
+      "outputPath": "C:\\Users\\laptop368\\Desktop\\project_thientd\\PRN232-G5-Project\\PRN232_g5_project\\PRN232_BE\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

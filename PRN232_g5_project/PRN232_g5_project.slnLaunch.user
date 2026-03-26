@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "PRN232_BE\\PRN232_BE.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "PRN232_FE\\PRN232_FE.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
