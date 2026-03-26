@@ -143,10 +143,10 @@ namespace PRN232_BE.Controllers
                 Id = product.Id,
                 SellerId = sellerId,
                 StoreId = store.Id,
-                Title = request.Title,
-                Description = request.Description,
-                Price = request.Price,
-                CategoryId = request.CategoryId,
+                Title = product.Title,
+                Description = product.Description,
+                Price = product.Price,
+                CategoryId = product.CategoryId,
                 CreatedAt = product.CreatedAt,
                 ThumbnailUrl = product.ThumbnailUrl
             });
