@@ -1,7 +1,8 @@
-﻿namespace PRN232_BE.DTOs.Product
+namespace PRN232_BE.DTOs.Product
 {
     public class ProductResponse
     {
+        public int Id { get; set; }
         public int SellerId { get; set; }
         public int StoreId { get; set; }
         public string Title { get; set; }

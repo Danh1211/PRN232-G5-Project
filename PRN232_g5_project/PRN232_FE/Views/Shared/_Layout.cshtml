@@ -1,44 +1,143 @@
-﻿<!DOCTYPE html>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var username = HttpContextAccessor.HttpContext?.Session.GetString("Username");
+    var token = HttpContextAccessor.HttpContext?.Session.GetString("JwtToken");
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - PRN232_FE</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PRN232_FE.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PRN232_FE</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+    <header class="ebay-header">
+        <!-- Top Utility Bar -->
+        <div class="ebay-top-bar" style="border-bottom: 1px solid #e5e5e5; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; font-size: 12px;">
+            <div class="top-nav-left" style="display: flex; gap: 16px; align-items: center; height: 30px;">
+                @if (!string.IsNullOrEmpty(token))
+                {
+                    <span>
+                        Hi@(string.IsNullOrEmpty(username) ? "!" : " " + username + "!") 
+                        <a href="/Auth/Profile" style="color: #0654ba; text-decoration: none;">Profile</a> | 
+                        <a href="/Auth/SignOut" style="color: #0654ba; text-decoration: none;">Sign out</a>
+                    </span>
+                }
+                else
+                {
+                    <span>Hi! <a href="/Auth/SignIn" style="color: #0654ba; text-decoration: none;">Sign in</a> or <a href="/Auth/SignUp" style="color: #0654ba; text-decoration: none;">register</a></span>
+                }
+                <a href="#" style="color: inherit; text-decoration: none;">Daily Deals</a>
+                <a href="#" style="color: inherit; text-decoration: none;">Brand Outlet</a>
+                <a href="#" style="color: inherit; text-decoration: none;">Help & Contact</a>
             </div>
-        </nav>
+            <div class="top-nav-right" style="display: flex; gap: 16px; align-items: center;">
+                <a href="#" style="color: inherit; text-decoration: none;">Sell</a>
+                <a href="#" style="color: inherit; text-decoration: none;">Watchlist <i class="bi bi-chevron-down"></i></a>
+                <a href="#" style="color: inherit; text-decoration: none;">My eBay <i class="bi bi-chevron-down"></i></a>
+                <a href="#" style="color: inherit; text-decoration: none;"><i class="bi bi-bell"></i></a>
+                <a href="#" style="color: inherit; text-decoration: none;"><i class="bi bi-cart"></i></a>
+            </div>
+        </div>
+
+        <!-- Main Search Header -->
+        <div class="ebay-main-header" style="display: flex; align-items: center; padding: 16px; gap: 16px;">
+            <a href="/" class="ebay-logo" style="font-size: 32px; font-weight: bold; text-decoration: none; letter-spacing: -2px;">
+                <span style="color: #e53238;">e</span><span style="color: #0064d2;">b</span><span style="color: #f5af02;">a</span><span style="color: #86b817;">y</span>
+            </a>
+            
+            <button class="shop-by-category" style="background: none; border: none; font-size: 14px; color: #333; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                Shop by <br/> category <i class="bi bi-chevron-down"></i>
+            </button>
+
+            <div class="ebay-search-container" style="display: flex; flex-grow: 1; border: 2px solid #333; border-radius: 4px; overflow: hidden; height: 40px;">
+                <div style="display: flex; align-items: center; padding-left: 8px;"><i class="bi bi-search" style="color: #707070;"></i></div>
+                <input type="text" placeholder="Search for anything" style="flex-grow: 1; border: none; padding: 0 8px; outline: none; font-size: 16px;" />
+                <select style="border: none; border-left: 1px solid #ccc; background: #fff; padding: 0 12px; font-size: 14px; outline: none; cursor: pointer;">
+                    <option>All Categories</option>
+                </select>
+            </div>
+            
+            <button class="ebay-search-btn" style="background-color: #3665f3; color: white; border: none; border-radius: 4px; padding: 0 40px; height: 40px; font-size: 16px; cursor: pointer;">Search</button>
+            <a href="#" style="font-size: 12px; color: #707070; text-decoration: none;">Advanced</a>
+        </div>
+
+        <!-- Main Navigation -->
+        <div class="ebay-main-nav" style="border-top: 1px solid #e5e5e5; display: flex; gap: 24px; padding: 0 16px; font-size: 14px; overflow-x: auto; white-space: nowrap; height: 42px; align-items: center;">
+            <a href="/" style="color: #333; text-decoration: none; font-weight: bold; border-bottom: 2px solid #333; padding-bottom: 8px; margin-top: 10px;">Home</a>
+            <a href="#" style="color: #333; text-decoration: none;"><i class="bi bi-heart" style="margin-right: 4px;"></i>Saved</a>
+            <a href="#" style="color: #333; text-decoration: none;">Motors</a>
+            <a href="#" style="color: #333; text-decoration: none;">Electronics</a>
+            <a href="#" style="color: #333; text-decoration: none;">Collectibles</a>
+            <a href="#" style="color: #333; text-decoration: none;">Home & Garden</a>
+            <a href="#" style="color: #333; text-decoration: none;">Fashion</a>
+            <a href="#" style="color: #333; text-decoration: none;">Toys</a>
+            <a href="#" style="color: #333; text-decoration: none;">Sporting Goods</a>
+            <a href="#" style="color: #333; text-decoration: none;">Business & Industrial</a>
+            <a href="#" style="color: #333; text-decoration: none;">Jewelry & Watches</a>
+            <a href="#" style="color: #333; text-decoration: none;">eBay Live</a>
+            <a href="#" style="color: #333; text-decoration: none;">Refurbished</a>
+        </div>
     </header>
-    <div class="container">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 16px;">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - PRN232_FE - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer style="border-top: 1px solid #ccc; padding: 40px 16px; background-color: #f7f7f7; font-size: 12px; color: #707070; margin-top: 40px;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
+            <div style="min-width: 150px;">
+                <h5 style="font-size: 14px; color: #333; font-weight: bold; margin-bottom: 16px;">Buy</h5>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="#" style="color: #707070; text-decoration: none;">Registration</a></li>
+                    <li><a href="#" style="color: #707070; text-decoration: none;">eBay Money Back Guarantee</a></li>
+                    <li><a href="#" style="color: #707070; text-decoration: none;">Bidding & buying help</a></li>
+                    <li><a href="#" style="color: #707070; text-decoration: none;">Stores</a></li>
+                </ul>
+            </div>
+            <div style="min-width: 150px;">
+                <h5 style="font-size: 14px; color: #333; font-weight: bold; margin-bottom: 16px;">Sell</h5>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="#" style="color: #707070; text-decoration: none;">Start selling</a></li>
+                    <li><a href="#" style="color: #707070; text-decoration: none;">Learn to sell</a></li>
+                    <li><a href="#" style="color: #707070; text-decoration: none;">Affiliates</a></li>
+                </ul>
+            </div>
+            <div style="min-width: 150px;">
+                <h5 style="font-size: 14px; color: #333; font-weight: bold; margin-bottom: 16px;">Tools & apps</h5>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="#" style="color: #707070; text-decoration: none;">Developers</a></li>
+                    <li><a href="#" style="color: #707070; text-decoration: none;">Security center</a></li>
+                    <li><a href="#" style="color: #707070; text-decoration: none;">Site map</a></li>
+                </ul>
+            </div>
+            <div style="min-width: 150px;">
+                <h5 style="font-size: 14px; color: #333; font-weight: bold; margin-bottom: 16px;">Stay connected</h5>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="#" style="color: #707070; text-decoration: none;"><i class="bi bi-facebook" style="margin-right: 8px;"></i>eBay's Blogs</a></li>
+                    <li><a href="#" style="color: #707070; text-decoration: none;"><i class="bi bi-twitter" style="margin-right: 8px;"></i>Facebook</a></li>
+                    <li><a href="#" style="color: #707070; text-decoration: none;"><i class="bi bi-twitter" style="margin-right: 8px;"></i>Twitter</a></li>
+                </ul>
+            </div>
+            <div style="min-width: 150px;">
+                <h5 style="font-size: 14px; color: #333; font-weight: bold; margin-bottom: 16px;">About eBay</h5>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="#" style="color: #707070; text-decoration: none;">Company info</a></li>
+                    <li><a href="#" style="color: #707070; text-decoration: none;">News</a></li>
+                    <li><a href="#" style="color: #707070; text-decoration: none;">Investors</a></li>
+                    <li><a href="#" style="color: #707070; text-decoration: none;">Careers</a></li>
+                    <li><a href="#" style="color: #707070; text-decoration: none;">Diversity & Inclusion</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="max-width: 1200px; margin: 40px auto 0; text-align: center;">
+            <p>Copyright © 1995-2026 eBay Inc. All Rights Reserved. Accessibility, User Agreement, Privacy, Payments Terms of Use, Cookies, CA Privacy Notice, Your Privacy Choices and AdChoice.</p>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
