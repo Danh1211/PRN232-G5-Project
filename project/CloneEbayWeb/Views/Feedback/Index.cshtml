@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Feedback System";
+}
+
+<h1>🛒 eBay Feedback System</h1>
+
+<hr />
+
+<!-- CREATE -->
+<h3>Create Feedback</h3>
+<input id="orderId" placeholder="Order ID" />
+<input id="comment" placeholder="Comment" />
+<button onclick="createFeedback()">Create</button>
+
+<hr />
+
+<!-- UPDATE -->
+<h3>Update Feedback</h3>
+<input id="feedbackId" placeholder="Feedback ID" />
+<input id="newComment" placeholder="New Comment" />
+<button onclick="updateFeedback()">Update</button>
+
+<hr />
+
+<!-- REPLY -->
+<h3>Reply Feedback</h3>
+<input id="replyId" placeholder="FeedbackDetail ID" />
+<input id="replyContent" placeholder="Reply content" />
+<button onclick="replyFeedback()">Reply</button>
+
+<hr />
+
+<pre id="result"></pre>
+
+<script>
+    const BASE_URL = "https://localhost:7206/api";
+
+    function showResult(data) {
+        document.getElementById("result").innerText = data;
+    }
+
+    // ================= CREATE =================
+    async function createFeedback() {
+        const data = {
+            feedbackId: 1,
+            buyerId: 2,
+            orderId: parseInt(document.getElementById("orderId").value),
+            type: 1,
+            itemAsDescribed: 5,
+            communication: 5,
+            shippingTime: 5,
+            shippingCost: 5,
+            comment: document.getElementById("comment").value
+        };
+
+        const res = await fetch(`${BASE_URL}/feedback-detail`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+
+        showResult(await res.text());
+    }
+
+    // ================= UPDATE =================
+    async function updateFeedback() {
+        const id = document.getElementById("feedbackId").value;
+
+        const res = await fetch(`${BASE_URL}/feedback-detail/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                type: 3,
+                comment: document.getElementById("newComment").value,
+                itemAsDescribed: 2,
+                communication: 2,
+                shippingTime: 2,
+                shippingCost: 2
+            })
+        });
+
+        showResult(await res.text());
+    }
+
+    // ================= REPLY =================
+    async function replyFeedback() {
+        const data = {
+            feedbackDetailId: parseInt(document.getElementById("replyId").value),
+            sellerId: 1,
+            replyContent: document.getElementById("replyContent").value
+        };
+
+        const res = await fetch(`${BASE_URL}/feedback-reply`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+
+        showResult(await res.text());
+    }
+</script>

@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "Backend\\EbayClone.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "CloneEbayWeb\\CloneEbayWeb.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

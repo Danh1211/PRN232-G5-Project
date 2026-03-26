@@ -1,0 +1,71 @@
+[
+  {
+    "ContainingType": "FeedbackDetailController",
+    "Method": "Create",
+    "RelativePath": "api/feedback-detail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "FeedbackDetail",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FeedbackDetailController",
+    "Method": "Update",
+    "RelativePath": "api/feedback-detail/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updated",
+        "Type": "FeedbackDetail",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FeedbackReplyController",
+    "Method": "Create",
+    "RelativePath": "api/feedback-reply",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "FeedbackReply",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SellerToBuyerFeedbackController",
+    "Method": "Create",
+    "RelativePath": "api/seller-feedback",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "SellerToBuyerFeedback",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

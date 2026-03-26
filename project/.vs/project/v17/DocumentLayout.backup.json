@@ -1,0 +1,661 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\Backend.csproj|c:\\users\\laptop368\\desktop\\prn232_g5_project\\project\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\Backend.csproj|solutionrelative:backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F357047A-203B-4EEF-B310-5DBD83E081F4}|CloneEbayWeb\\CloneEbayWeb.csproj|c:\\users\\laptop368\\desktop\\prn232_g5_project\\project\\cloneebayweb\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F357047A-203B-4EEF-B310-5DBD83E081F4}|CloneEbayWeb\\CloneEbayWeb.csproj|solutionrelative:cloneebayweb\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F357047A-203B-4EEF-B310-5DBD83E081F4}|CloneEbayWeb\\CloneEbayWeb.csproj|c:\\users\\laptop368\\desktop\\prn232_g5_project\\project\\cloneebayweb\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F357047A-203B-4EEF-B310-5DBD83E081F4}|CloneEbayWeb\\CloneEbayWeb.csproj|solutionrelative:cloneebayweb\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F357047A-203B-4EEF-B310-5DBD83E081F4}|CloneEbayWeb\\CloneEbayWeb.csproj|c:\\users\\laptop368\\desktop\\prn232_g5_project\\project\\cloneebayweb\\views\\feedback\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F357047A-203B-4EEF-B310-5DBD83E081F4}|CloneEbayWeb\\CloneEbayWeb.csproj|solutionrelative:cloneebayweb\\views\\feedback\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F357047A-203B-4EEF-B310-5DBD83E081F4}|CloneEbayWeb\\CloneEbayWeb.csproj|c:\\users\\laptop368\\desktop\\prn232_g5_project\\project\\cloneebayweb\\controllers\\feedbackcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F357047A-203B-4EEF-B310-5DBD83E081F4}|CloneEbayWeb\\CloneEbayWeb.csproj|solutionrelative:cloneebayweb\\controllers\\feedbackcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\EbayClone.csproj|c:\\users\\laptop368\\desktop\\prn232_g5_project\\project\\backend\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\EbayClone.csproj|solutionrelative:backend\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\Backend.csproj|c:\\users\\laptop368\\desktop\\prn232_g5_project\\project\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\Backend.csproj|solutionrelative:backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\EbayClone.csproj|c:\\users\\laptop368\\desktop\\prn232_g5_project\\project\\backend\\controllers\\sellertobuyerfeedbackcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\EbayClone.csproj|solutionrelative:backend\\controllers\\sellertobuyerfeedbackcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\EbayClone.csproj|c:\\users\\laptop368\\desktop\\prn232_g5_project\\project\\backend\\controllers\\feedbackreplycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\EbayClone.csproj|solutionrelative:backend\\controllers\\feedbackreplycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\EbayClone.csproj|c:\\users\\laptop368\\desktop\\prn232_g5_project\\project\\backend\\controllers\\feedbackdetailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\EbayClone.csproj|solutionrelative:backend\\controllers\\feedbackdetailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\EbayClone.csproj|c:\\users\\laptop368\\desktop\\prn232_g5_project\\project\\backend\\entities\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\EbayClone.csproj|solutionrelative:backend\\entities\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\Backend.csproj|c:\\users\\laptop368\\desktop\\prn232_g5_project\\project\\backend\\entities\\sellertobuyerfeedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\Backend.csproj|solutionrelative:backend\\entities\\sellertobuyerfeedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\Backend.csproj|c:\\users\\laptop368\\desktop\\prn232_g5_project\\project\\backend\\entities\\feedbackreply.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\Backend.csproj|solutionrelative:backend\\entities\\feedbackreply.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\Backend.csproj|c:\\users\\laptop368\\desktop\\prn232_g5_project\\project\\backend\\entities\\feedbackdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\Backend.csproj|solutionrelative:backend\\entities\\feedbackdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\EbayClone.csproj|c:\\users\\laptop368\\desktop\\prn232_g5_project\\project\\backend\\entities\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\EbayClone.csproj|solutionrelative:backend\\entities\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\EbayClone.csproj|c:\\users\\laptop368\\desktop\\prn232_g5_project\\project\\backend\\dtos\\feedbackdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\EbayClone.csproj|solutionrelative:backend\\dtos\\feedbackdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\EbayClone.csproj|c:\\users\\laptop368\\desktop\\prn232_g5_project\\project\\backend\\ebayclone.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{E92D2A00-6BF9-42FA-9829-1E8CE3749D86}|Backend\\EbayClone.csproj|solutionrelative:backend\\ebayclone.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 67,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:7:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{873151d0-cf2e-48cc-b4bf-ad0394f6a3c3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c9c0ae26-aa77-11d2-b3f0-0000f87570ee}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1377497384:0:{83107a3e-496a-485e-b455-16ddb978e55e}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:15:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:16:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:17:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:14:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:13:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:12:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:11:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:10:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:9:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:8:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:7:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:6:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:5:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:4:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:7:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:16:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:17:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:11:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{588470cc-84f8-4a57-9ac4-86bca0625ff4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1928210406:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:350743133:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:4:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:5:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:6:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:20:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:27:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:23:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:29:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:12:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:13:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:14:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\CloneEbayWeb\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "CloneEbayWeb\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\CloneEbayWeb\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "CloneEbayWeb\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-24T10:18:01.324Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\CloneEbayWeb\\Program.cs",
+              "RelativeDocumentMoniker": "CloneEbayWeb\\Program.cs",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\CloneEbayWeb\\Program.cs",
+              "RelativeToolTip": "CloneEbayWeb\\Program.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACEAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T10:17:03.5Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\CloneEbayWeb\\Views\\Feedback\\Index.cshtml",
+              "RelativeDocumentMoniker": "CloneEbayWeb\\Views\\Feedback\\Index.cshtml",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\CloneEbayWeb\\Views\\Feedback\\Index.cshtml",
+              "RelativeToolTip": "CloneEbayWeb\\Views\\Feedback\\Index.cshtml",
+              "ViewState": "AgIAAEkAAAAAAAAAAADwv2QAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-24T10:16:34.041Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FeedbackController.cs",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\CloneEbayWeb\\Controllers\\FeedbackController.cs",
+              "RelativeDocumentMoniker": "CloneEbayWeb\\Controllers\\FeedbackController.cs",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\CloneEbayWeb\\Controllers\\FeedbackController.cs",
+              "RelativeToolTip": "CloneEbayWeb\\Controllers\\FeedbackController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T10:15:24.933Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Backend\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "Backend\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T08:37:01.649Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Program.cs",
+              "RelativeDocumentMoniker": "Backend\\Program.cs",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Program.cs",
+              "RelativeToolTip": "Backend\\Program.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAADwvysAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T08:36:18.89Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "FeedbackDetailController.cs",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Controllers\\FeedbackDetailController.cs",
+              "RelativeDocumentMoniker": "Backend\\Controllers\\FeedbackDetailController.cs",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Controllers\\FeedbackDetailController.cs",
+              "RelativeToolTip": "Backend\\Controllers\\FeedbackDetailController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T08:40:26.248Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "FeedbackReplyController.cs",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Controllers\\FeedbackReplyController.cs",
+              "RelativeDocumentMoniker": "Backend\\Controllers\\FeedbackReplyController.cs",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Controllers\\FeedbackReplyController.cs",
+              "RelativeToolTip": "Backend\\Controllers\\FeedbackReplyController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T08:40:55.963Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SellerToBuyerFeedbackController.cs",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Controllers\\SellerToBuyerFeedbackController.cs",
+              "RelativeDocumentMoniker": "Backend\\Controllers\\SellerToBuyerFeedbackController.cs",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Controllers\\SellerToBuyerFeedbackController.cs",
+              "RelativeToolTip": "Backend\\Controllers\\SellerToBuyerFeedbackController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T08:41:17.09Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\appsettings.json",
+              "RelativeDocumentMoniker": "Backend\\appsettings.json",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\appsettings.json",
+              "RelativeToolTip": "Backend\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-24T08:36:36.295Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Entities\\Order.cs",
+              "RelativeDocumentMoniker": "Backend\\Entities\\Order.cs",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Entities\\Order.cs",
+              "RelativeToolTip": "Backend\\Entities\\Order.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T08:39:04.348Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "SellerToBuyerFeedback.cs",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Entities\\SellerToBuyerFeedback.cs",
+              "RelativeDocumentMoniker": "Backend\\Entities\\SellerToBuyerFeedback.cs",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Entities\\SellerToBuyerFeedback.cs",
+              "RelativeToolTip": "Backend\\Entities\\SellerToBuyerFeedback.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T08:38:42.741Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "FeedbackReply.cs",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Entities\\FeedbackReply.cs",
+              "RelativeDocumentMoniker": "Backend\\Entities\\FeedbackReply.cs",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Entities\\FeedbackReply.cs",
+              "RelativeToolTip": "Backend\\Entities\\FeedbackReply.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T08:37:55.213Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "FeedbackDetail.cs",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Entities\\FeedbackDetail.cs",
+              "RelativeDocumentMoniker": "Backend\\Entities\\FeedbackDetail.cs",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Entities\\FeedbackDetail.cs",
+              "RelativeToolTip": "Backend\\Entities\\FeedbackDetail.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAswBQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T08:37:29.988Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Feedback.cs",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Entities\\Feedback.cs",
+              "RelativeDocumentMoniker": "Backend\\Entities\\Feedback.cs",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\Entities\\Feedback.cs",
+              "RelativeToolTip": "Backend\\Entities\\Feedback.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T09:01:51.977Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "FeedbackDto.cs",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\DTOs\\FeedbackDto.cs",
+              "RelativeDocumentMoniker": "Backend\\DTOs\\FeedbackDto.cs",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\DTOs\\FeedbackDto.cs",
+              "RelativeToolTip": "Backend\\DTOs\\FeedbackDto.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAADwvxwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T08:40:03.003Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "EbayClone.csproj",
+              "DocumentMoniker": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\EbayClone.csproj",
+              "RelativeDocumentMoniker": "Backend\\EbayClone.csproj",
+              "ToolTip": "C:\\Users\\laptop368\\Desktop\\PRN232_G5_PROJECT\\project\\Backend\\EbayClone.csproj",
+              "RelativeToolTip": "Backend\\EbayClone.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-03-24T08:33:48.41Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 1052,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:12:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:13:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:10:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:25:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:26:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:31:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:32:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:33:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:35:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:36:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:38:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:39:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:40:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:42:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:15:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:8:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:9:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:24:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:28:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:22:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 1304,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{a80febb4-e7e0-4147-b476-21aaf2453969}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
