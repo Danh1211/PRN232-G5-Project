@@ -25,6 +25,8 @@ public partial class Product
 
     public DateTime CreatedAt { get; set; }
 
+    public string? ThumbnailUrl { get; set; }
+
     public virtual Category Category { get; set; } = null!;
 
     public virtual ICollection<OrderTable> OrderTables { get; set; } = new List<OrderTable>();
