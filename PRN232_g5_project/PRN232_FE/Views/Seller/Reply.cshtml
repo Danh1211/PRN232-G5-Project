@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Trả lời Feedback";
+}
+<h2>@ViewData["Title"]</h2>
+
+<form id="replyForm">
+    <label>FeedbackDetailId: <input type="number" id="feedbackDetailId" required /></label><br />
+    <label>ReplyContent:<br /><textarea id="replyContent" rows="4" cols="50" required></textarea></label><br />
+    <label>Images: <input type="file" id="images" multiple accept="image/*" /></label><br />
+    <button type="submit">Gửi trả lời</button>
+</form>
+
+<div id="result"></div>
+
+<script src="~/js/feedback.js"></script>
+<script>
+document.getElementById('replyForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = new FormData();
+    form.append('FeedbackDetailId', document.getElementById('feedbackDetailId').value);
+    form.append('ReplyContent', document.getElementById('replyContent').value);
+    const files = document.getElementById('images').files;
+    for (let i = 0; i < files.length; i++) form.append('images', files[i]);
+
+    const res = await postFormData('/api/FeedbackReply', form);
+    const text = await res.text();
+    if (res.ok) document.getElementById('result').innerText = 'Trả lời thành công: ' + text;
+    else document.getElementById('result').innerText = 'Lỗi: ' + text;
+});
+</script>

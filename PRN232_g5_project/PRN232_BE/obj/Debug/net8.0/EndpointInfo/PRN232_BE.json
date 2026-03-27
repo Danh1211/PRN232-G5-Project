@@ -241,6 +241,131 @@
         }
       }
     },
+    "/api/Feedback": {
+      "post": {
+        "tags": [
+          "Feedback"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "OrderId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Type": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ItemAsDescribed": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Communication": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ShippingTime": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ShippingCost": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Comment": {
+                    "type": "string"
+                  },
+                  "images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "OrderId": {
+                  "style": "form"
+                },
+                "Type": {
+                  "style": "form"
+                },
+                "ItemAsDescribed": {
+                  "style": "form"
+                },
+                "Communication": {
+                  "style": "form"
+                },
+                "ShippingTime": {
+                  "style": "form"
+                },
+                "ShippingCost": {
+                  "style": "form"
+                },
+                "Comment": {
+                  "style": "form"
+                },
+                "images": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Feedback/{id}": {
+      "put": {
+        "tags": [
+          "Feedback"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFeedbackDetailRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFeedbackDetailRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFeedbackDetailRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Order": {
       "post": {
         "tags": [
@@ -1561,6 +1686,41 @@
         },
         "additionalProperties": false
       },
+      "UpdateFeedbackDetailRequest": {
+        "type": "object",
+        "properties": {
+          "itemAsDescribed": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "communication": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "shippingTime": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "shippingCost": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "comment": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "UpdateOrderStatusRequest": {
         "type": "object",
         "properties": {
@@ -1598,7 +1758,7 @@
     "securitySchemes": {
       "Bearer": {
         "type": "http",
-        "description": "JWT Authorization header using the Bearer scheme. Enter: 'Bearer {token}'",
+        "description": "JWT Authorization header using the Bearer scheme. Hãy nhập Token của bạn vào bên dưới.\r\n\r\nVí dụ: 'eyJhbGciOiJIUzI1NiIs...'",
         "scheme": "bearer"
       }
     }

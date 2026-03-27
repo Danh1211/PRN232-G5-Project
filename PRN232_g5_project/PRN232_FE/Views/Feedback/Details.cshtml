@@ -1,0 +1,35 @@
+﻿
+
+@{
+    ViewData["Title"] = "Chi tiết Feedback";
+}
+<h2>@ViewData["Title"]</h2>
+
+<label>FeedbackId: <input type="number" id="feedbackId" /></label>
+<button id="load">Load</button>
+
+<div id="detail"></div>
+
+<script src="~/js/feedback.js"></script>
+<script>
+document.getElementById('load').addEventListener('click', async () => {
+    const id = document.getElementById('feedbackId').value;
+    if (!id) return alert('Nhập id');
+    const res = await getJson(`/api/Feedback/${id}`);
+    if (!res.ok) {
+        document.getElementById('detail').innerText = 'Lỗi: ' + await res.text();
+        return;
+    }
+    const data = await res.json();
+    const images = (data.Images || []).map(i => `<img src="${i}" width="140" style="margin:6px" />`).join('');
+    const reply = data.Reply ? `<h4>Reply</h4><div>${data.Reply.ReplyContent}</div>` : '';
+    document.getElementById('detail').innerHTML = `
+        <div><b>OrderId:</b> ${data.orderId}</div>
+        <div><b>Buyer:</b> ${data.buyerName}</div>
+        <div><b>Type:</b> ${data.type}</div>
+        <div><b>Comment:</b> ${data.comment || ''}</div>
+        <div>${images}</div>
+        ${reply}
+    `;
+});
+</script>

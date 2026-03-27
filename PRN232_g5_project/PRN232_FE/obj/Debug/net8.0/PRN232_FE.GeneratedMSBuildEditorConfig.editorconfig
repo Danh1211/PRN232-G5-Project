@@ -28,12 +28,36 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxTaWduVXAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/laptop368/Desktop/project_thientd/PRN232-G5-Project/PRN232_g5_project/PRN232_FE/Views/Feedback/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmVlZGJhY2tcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/laptop368/Desktop/project_thientd/PRN232-G5-Project/PRN232_g5_project/PRN232_FE/Views/Feedback/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmVlZGJhY2tcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/laptop368/Desktop/project_thientd/PRN232-G5-Project/PRN232_g5_project/PRN232_FE/Views/Feedback/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmVlZGJhY2tcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/laptop368/Desktop/project_thientd/PRN232-G5-Project/PRN232_g5_project/PRN232_FE/Views/Feedback/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmVlZGJhY2tcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/laptop368/Desktop/project_thientd/PRN232-G5-Project/PRN232_g5_project/PRN232_FE/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/laptop368/Desktop/project_thientd/PRN232-G5-Project/PRN232_g5_project/PRN232_FE/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/laptop368/Desktop/project_thientd/PRN232-G5-Project/PRN232_g5_project/PRN232_FE/Views/Seller/Reply.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VsbGVyXFJlcGx5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/laptop368/Desktop/project_thientd/PRN232-G5-Project/PRN232_g5_project/PRN232_FE/Views/Seller/SendToBuyer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VsbGVyXFNlbmRUb0J1eWVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/laptop368/Desktop/project_thientd/PRN232-G5-Project/PRN232_g5_project/PRN232_FE/Views/Shared/Error.cshtml]

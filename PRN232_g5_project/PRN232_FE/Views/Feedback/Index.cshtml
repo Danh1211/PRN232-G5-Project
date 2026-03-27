@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "Danh sách Feedback (Seller)";
+}
+<h2>@ViewData["Title"]</h2>
+
+<label>SellerId: <input type="number" id="sellerId" /></label>
+<button id="useToken">Lấy từ token</button>
+<button id="load">Tải</button>
+
+<div id="list"></div>
+
+<script src="~/js/feedback.js"></script>
+<script>
+document.getElementById('useToken').addEventListener('click', () => {
+    const token = getToken();
+    if (!token) return alert('Không có token trong localStorage');
+    const payload = parseJwt(token);
+    if (!payload || !payload.UserId) return alert('Không tìm thấy UserId trong token');
+    document.getElementById('sellerId').value = payload.UserId;
+});
+
+document.getElementById('load').addEventListener('click', async () => {
+    const sellerId = document.getElementById('sellerId').value;
+    if (!sellerId) return alert('Nhập sellerId');
+    const res = await getJson(`/api/Feedback/seller/${sellerId}`);
+    if (!res.ok) {
+        document.getElementById('list').innerText = 'Lỗi load: ' + await res.text();
+        return;
+    }
+    const data = await res.json();
+    if (data.Total === 0) {
+        document.getElementById('list').innerText = 'Chưa có feedback';
+        return;
+    }
+    const html = data.Data.map(fd => {
+        const images = (fd.Images || []).map(i => `<img src="${i}" width="100" style="margin:4px" />`).join('');
+        const reply = fd.Reply ? `<div><b>Reply:</b> ${fd.Reply.ReplyContent}</div>` : '';
+        return `<div style="border:1px solid #ccc;padding:8px;margin:8px">
+            <div><b>Id:</b> ${fd.Id} | Buyer: ${fd.BuyerName}</div>
+            <div><b>Type:</b> ${fd.Type}</div>
+            <div>${fd.Comment || ''}</div>
+            <div>${images}</div>
+            ${reply}
+            <a href="/Feedback/Details?feedbackId=${fd.Id}">Xem chi tiết</a>
+        </div>`;
+    }).join('');
+    document.getElementById('list').innerHTML = html;
+});
+</script>

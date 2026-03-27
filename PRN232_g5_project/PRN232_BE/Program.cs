@@ -5,63 +5,20 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using PRN232_BE.BackgroundJobs;
-using PRN232_BE.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// DbContext
 builder.Services.AddDbContext<CloneEbayDb1Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
-
-// Read allowed origins from configuration
-var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
-
-builder.Services.AddCors(options =>
-{
-    // Policy dùng cho regular API requests (no credentials needed) - development friendly
-    options.AddPolicy("AllowApi", policy =>
-    {
-        policy.AllowAnyHeader()
-              .AllowAnyMethod()
-              // For API endpoints we can allow any origin in dev (change in production)
-              .AllowAnyOrigin();
-    });
-
-    // Policy dành riêng cho SignalR (needs credentials) - must list explicit origins
-    options.AddPolicy("SignalR", policy =>
-    {
-        policy.AllowAnyHeader()
-              .AllowAnyMethod();
-
-        if (allowedOrigins.Length > 0)
-        {
-            policy.WithOrigins(allowedOrigins)
-                  .AllowCredentials();
-        }
-        else
-        {
-            // Dev fallback: if no explicit origins provided, allow echo origin to satisfy AllowCredentials
-            policy.SetIsOriginAllowed(origin => true)
-                  .AllowCredentials();
-        }
-    });
-});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHostedService<AutoReleaseOrdersService>();
-
-// SignalR
-builder.Services.AddSignalR();
-
-// JWT key guard
-var jwtKey = builder.Configuration["Jwt:Key"];
-if (string.IsNullOrEmpty(jwtKey))
-{
-    throw new InvalidOperationException("Configuration 'Jwt:Key' is missing or empty. Please set Jwt:Key in appsettings.json.");
-}
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+// 2. Cấu hình JWT Authentication
+builder.Services.AddAuthentication(options => {
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
@@ -70,35 +27,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
-        };
-
-        options.Events = new JwtBearerEvents
-        {
-            OnMessageReceived = context =>
-            {
-                // allow access_token in query string for SignalR
-                var accessToken = context.Request.Query["access_token"].FirstOrDefault();
-                var path = context.HttpContext.Request.Path;
-                if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/chathub"))
-                {
-                    context.Token = accessToken;
-                }
-                return Task.CompletedTask;
-            }
+            ValidIssuer = builder.Configuration["Jwt:Issuer"], // Lấy từ appsettings.json
+            ValidAudience = builder.Configuration["Jwt:Audience"], // Lấy từ appsettings.json
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])) // Lấy từ appsettings.json
         };
     });
 
-// Swagger + JWT support
+// 3. Cấu hình Swagger ?? hỗ trợ nhập JWT Token
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Ebay Clone API", Version = "v1" });
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = "JWT Authorization header using the Bearer scheme. Enter: 'Bearer {token}'",
+        Description = "JWT Authorization header using the Bearer scheme. Hãy nhập Token của bạn vào bên dưới.\r\n\r\nVí dụ: 'eyJhbGciOiJIUzI1NiIs...'",
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.Http,
@@ -123,49 +65,22 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Optional DB connectivity check (log only)
-using (var scope = app.Services.CreateScope())
-{
-    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-    try
-    {
-        var db = scope.ServiceProvider.GetRequiredService<CloneEbayDb1Context>();
-        var canConnect = await db.Database.CanConnectAsync();
-        if (!canConnect)
-        {
-            logger.LogError("Cannot connect to database. ConnectionString: {cs}", builder.Configuration.GetConnectionString("MyDB"));
-            logger.LogError("DB unavailable at startup — app will continue to run for debugging. Fix DB and restart.");
-        }
-        else
-        {
-            logger.LogInformation("Database connection successful.");
-        }
-    }
-    catch (Exception ex)
-    {
-        var loggerEx = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-        loggerEx.LogError(ex, "Database connectivity check failed at startup (exception). App will continue to run.");
-    }
-}
-
+// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-app.UseRouting();
+// app.UseHttpsRedirection(); // Removed to prevent Http clients from dropping Authorization headers on 307 redirects
 
-// Use API CORS globally (allows frontend login requests)
-app.UseCors("AllowApi");
+// Serve static files so uploaded images are accessible
+app.UseStaticFiles();
 
+// 4. KÍCH HOẠT AUTHENTICATION (Bắt buộc phải nằm TRƯỚC UseAuthorization)
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-// Map SignalR with SignalR-specific CORS
-app.MapHub<ChatHub>("/chathub").RequireCors("SignalR");
 
 app.Run();

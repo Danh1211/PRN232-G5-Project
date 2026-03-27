@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Chỉnh sửa Feedback";
+}
+<h2>@ViewData["Title"]</h2>
+
+<label>Feedback Id: <input type="number" id="feedbackId" /></label>
+<button id="loadBtn">Load</button>
+
+<form id="editForm" style="display:none">
+    <label>Type:
+        <select id="type"></select>
+    </label><br />
+    <label>ItemAsDescribed: <input type="number" id="itemAsDescribed" min="1" max="5" /></label><br />
+    <label>Communication: <input type="number" id="communication" min="1" max="5" /></label><br />
+    <label>ShippingTime: <input type="number" id="shippingTime" min="1" max="5" /></label><br />
+    <label>ShippingCost: <input type="number" id="shippingCost" min="1" max="5" /></label><br />
+    <label>Comment:<br /><textarea id="comment" rows="4" cols="50"></textarea></label><br />
+    <button type="submit">Cập nhật</button>
+</form>
+
+<div id="result"></div>
+
+<script src="~/js/feedback.js"></script>
+<script>
+document.getElementById('type').innerHTML = '<option value="1">Positive</option><option value="0">Neutral</option><option value="2">Negative</option>';
+
+document.getElementById('loadBtn').addEventListener('click', async () => {
+    const id = document.getElementById('feedbackId').value;
+    if (!id) return alert('Nhập feedback id');
+    const res = await getJson(`/api/Feedback/${id}`);
+    if (!res.ok) {
+        document.getElementById('result').innerText = 'Lỗi load: ' + await res.text();
+        return;
+    }
+    const data = await res.json();
+    document.getElementById('type').value = data.type;
+    document.getElementById('itemAsDescribed').value = data.itemAsDescribed || '';
+    document.getElementById('communication').value = data.communication || '';
+    document.getElementById('shippingTime').value = data.shippingTime || '';
+    document.getElementById('shippingCost').value = data.shippingCost || '';
+    document.getElementById('comment').value = data.comment || '';
+    document.getElementById('editForm').style.display = 'block';
+});
+
+document.getElementById('editForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = document.getElementById('feedbackId').value;
+    const payload = {
+        Type: parseInt(document.getElementById('type').value),
+        ItemAsDescribed: document.getElementById('itemAsDescribed').value ? parseInt(document.getElementById('itemAsDescribed').value) : null,
+        Communication: document.getElementById('communication').value ? parseInt(document.getElementById('communication').value) : null,
+        ShippingTime: document.getElementById('shippingTime').value ? parseInt(document.getElementById('shippingTime').value) : null,
+        ShippingCost: document.getElementById('shippingCost').value ? parseInt(document.getElementById('shippingCost').value) : null,
+        Comment: document.getElementById('comment').value
+    };
+    const res = await putJson(`/api/Feedback/${id}`, payload);
+    const txt = await res.text();
+    if (res.ok) document.getElementById('result').innerText = 'Cập nhật thành công';
+    else document.getElementById('result').innerText = 'Lỗi: ' + txt;
+});
+</script>

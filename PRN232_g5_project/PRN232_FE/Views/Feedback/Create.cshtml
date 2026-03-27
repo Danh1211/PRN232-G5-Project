@@ -1,0 +1,97 @@
+﻿@{
+    ViewData["Title"] = "Tạo Feedback";
+}
+<h2>@ViewData["Title"]</h2>
+
+<form id="feedbackForm">
+    <label>OrderId: <input type="number" id="orderId" required /></label><br />
+    <label>Loại:
+        <select id="type">
+            <option value="1">Positive</option>
+            <option value="0">Neutral</option>
+            <option value="2">Negative</option>
+        </select>
+    </label><br />
+    <label>ItemAsDescribed (1-5): <input type="number" id="itemAsDescribed" min="1" max="5" /></label><br />
+    <label>Communication (1-5): <input type="number" id="communication" min="1" max="5" /></label><br />
+    <label>ShippingTime (1-5): <input type="number" id="shippingTime" min="1" max="5" /></label><br />
+    <label>ShippingCost (1-5): <input type="number" id="shippingCost" min="1" max="5" /></label><br />
+    <label>Comment:<br /><textarea id="comment" rows="4" cols="50"></textarea></label><br />
+    <label>Images: <input type="file" id="images" multiple accept="image/*" /></label><br />
+    <button type="submit" id="submitBtn">Gửi Feedback</button>
+</form>
+
+<div id="result" style="margin-top:10px;color:#c00"></div>
+
+<!-- External script (normal) -->
+<script src="@Url.Content("~/js/feedback.js")"></script>
+
+<!-- Fallback: nếu postFormData không định nghĩa (external js 404), tạo hàm minimal để gửi form -->
+<script>
+if (typeof postFormData === 'undefined') {
+    // Minimal fallback implementation
+    window.postFormData = async function (url, formData) {
+        const token = localStorage.getItem('token') || '';
+        const headers = token ? { 'Authorization': 'Bearer ' + token } : {};
+        return fetch(url, { method: 'POST', headers: headers, body: formData });
+    };
+    console.warn('postFormData not found — using inline fallback.');
+}
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('feedbackForm');
+    const result = document.getElementById('result');
+    const submitBtn = document.getElementById('submitBtn');
+
+    if (!form) {
+        console.error('Form feedbackForm không tồn tại');
+        result.innerText = 'Lỗi nội bộ: form không tìm thấy';
+        return;
+    }
+
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        result.style.color = '#000';
+        result.innerText = 'Đang gửi...';
+        submitBtn.disabled = true;
+        try {
+            const formData = new FormData();
+            formData.append('OrderId', document.getElementById('orderId').value);
+            formData.append('Type', document.getElementById('type').value);
+            const iad = document.getElementById('itemAsDescribed').value;
+            if (iad) formData.append('ItemAsDescribed', iad);
+            const comm = document.getElementById('communication').value;
+            if (comm) formData.append('Communication', comm);
+            const st = document.getElementById('shippingTime').value;
+            if (st) formData.append('ShippingTime', st);
+            const sc = document.getElementById('shippingCost').value;
+            if (sc) formData.append('ShippingCost', sc);
+            const comment = document.getElementById('comment').value;
+            if (comment) formData.append('Comment', comment);
+
+            const files = document.getElementById('images').files;
+            for (let i = 0; i < files.length; i++) {
+                formData.append('images', files[i]);
+            }
+
+            console.log('Gửi formData, files count:', files.length);
+            const res = await postFormData('/api/Feedback', formData);
+            const text = await res.text();
+            if (res.ok) {
+                console.log('Server response:', text);
+                result.style.color = 'green';
+                result.innerText = 'Gửi thành công';
+            } else {
+                console.warn('Server trả lỗi:', res.status, text);
+                result.style.color = '#c00';
+                result.innerText = 'Lỗi khi gửi: ' + text;
+            }
+        } catch (err) {
+            console.error('Exception khi gửi feedback:', err);
+            result.style.color = '#c00';
+            result.innerText = 'Lỗi: ' + (err.message || err);
+        } finally {
+            submitBtn.disabled = false;
+        }
+    });
+});
+</script>
